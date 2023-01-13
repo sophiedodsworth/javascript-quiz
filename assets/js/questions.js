@@ -2,7 +2,7 @@ var questions = [
 
     {
         questionTitle: "Inside which HTML element do we put the JavaScript?",
-        questionChoices: ["<scripting>",
+        questionOptions: ["<scripting>",
             "<js>",
             "<javascript",
             "<script>"
@@ -12,7 +12,7 @@ var questions = [
 
     {
         questionTitle: "Where is the correct place to insert a JavaScript?",
-        questionChoices: [
+        questionOptions: [
             "The <body> section",
             "The <head> section",
             "Both the <head> section and the <body> section are correct",
@@ -22,7 +22,7 @@ var questions = [
 
     {
         questionTitle: "Which of the following is an advantage of using JavaScript?",
-        questionChoices: [
+        questionOptions: [
             "Less server interaction",
             "Immediate feedback to the visitors",
             "Increased interactivity",
@@ -44,7 +44,7 @@ var questions = [
 
     {
         questionTitle: "Which of the following function of Array object adds and/or removes elements from an array?",
-        questionChoices: [
+        questionOptions: [
             "toSource()",
             "sort()",
             "splice()",

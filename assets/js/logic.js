@@ -1,102 +1,142 @@
-// identifying the DOM elements
+// itentifying the DOM elements
 
 var questionsEl = document.querySelector("#questions");
-var questionOptions = document.querySelector("#question-options");
+var timerEl = document.querySelector("#time");
+var choicesEl = document.querySelector("#choices");
+var submitBtn = document.querySelector("#submit");
+var startBtn = document.querySelector("#start");
+var initialsEl = document.querySelector("#initials");
+var feedbackEl = document.querySelector("#feedback");
 
-// identifying variables for the questions
+// identifying variables for the questions and timer
 
-var questionIdex = 0;
+var currentQuestionIndex = 0;
 var time = questions.length * 10;
-
-// identifying variables for the timer
-
-var timerTwo;
+var timerId;
 
 // declaring function to start the quiz
 
-function startJavaQuiz() {
+function startQuiz() {
 
-    // hiding the start screen of the quiz
+  // hiding the start screen of the quiz 
 
-    var startQuizEl = document.getElementById("start-quiz");
-    startQuizEl.setAttribute("class", "hide");
+  var startScreenEl = document.getElementById("start-screen");
+  startScreenEl.setAttribute("class", "hide");
 
-    // un-hiding the start screen of the quiz 
+  // un-hiding the start screen of the quiz
 
-    questionsEl.removeAttribute("class");
+  questionsEl.removeAttribute("class");
 
-    // calling the function
+  // starts the timer when user begins quiz
+
+  timerId = setInterval(clockTick, 1000);
+
+  // displays the time to the user
+
+  timerEl.textContent = time;
+
+  // calling the function
+
+  getQuestion();
+}
+
+// declaring function to start the questios
+
+function getQuestion() {
+
+  // declaring variable to select the question object from the created array
+
+  var currentQuestion = questions[currentQuestionIndex];
+
+  // update title with current question
+
+  var titleEl = document.getElementById("question-title");
+  titleEl.textContent = currentQuestion.title;
+
+  // removes previous questions
+
+  choicesEl.innerHTML = "";
+
+  // a loop to go over the options / answers for the questions
+
+  currentQuestion.choices.forEach(function(choice, i) {
+
+    // creating buttons for each possible answer 
+
+    var choiceNode = document.createElement("button");
+
+    choiceNode.setAttribute("class", "choice");
+
+    choiceNode.setAttribute("value", choice);
+
+    choiceNode.textContent = i + 1 + ". " + choice;
+
+    // click event listener
+    choiceNode.onclick = questionClick;
+
+    // executing it to display for the user
+
+    choicesEl.appendChild(choiceNode);
+
+  });
+}
+
+function questionClick() {
+
+  // check if user guessed wrong
+
+  if (this.value !== questions[currentQuestionIndex].answer) {
+
+    // deducts ten seconds if the user answered the question wrong
+    time -= 10;
+
+    if (time < 0) {
+      time = 0;
+    }
+
+    // displays the time and what the user can see if they answer correctly or incorrectly
+
+    timerEl.textContent = time;
+    feedbackEl.textContent = "Incorrect";
+    feedbackEl.style.color = "purple";
+    feedbackEl.style.fontSize = "100%";
+
+  } else {
+
+    feedbackEl.textContent = "Correct";
+    feedbackEl.style.color = "purple";
+    feedbackEl.style.fontSize = "100%";
+
+  }
+
+  // executes the incorrect or correct feedback 
+
+  feedbackEl.setAttribute("class", "feedback");
+  setTimeout(function() {
+    feedbackEl.setAttribute("class", "feedback hide");
+  }, 1000);
+
+  // moves the user along to the next question in the quiz
+  currentQuestionIndex++;
+
+  // checks the time 
+
+  if (currentQuestionIndex === questions.length) {
+    quizEnd();
+
+  } else {
 
     getQuestion();
 
+  }
 }
 
-// declaring function to start the timer
+// user to submit initials and it saves their score
 
-function startTimer() {
-
-    // start timer
-    timerTwo = setInterval(countdown, 1000);
-
-    // display starting time to the user 
-    timerEl.textContent = time;
-
-}
-
-// declaring function to start the questions
-
-function startQuestions() {
-
-    // declaring variaable to select the question object from the created array
-
-    var userSelectedQuestion = questions[currentQuestionIndex];
-
-    // update title with current question
-
-    var questionsEl = document.getElementById("questions");
-    questionsEl.textContent = userSelectedQuestion.title;
-
-    // removes previous questions
-
-    questionOptions.innerHTML = "";
-
-    // a loop to go over the options / answers for the questions
-
-    userSelectedQuestion.choices.forEach(function (select, i) {
-
-        // creating buttons for each answer 
-
-        var questionOptionsNode = document.createElement("button");
-
-        questionOptionsNode.setAttribute("class", "answer");
-
-        questionOptionsNode.setAttribute("value", select);
-
-        questionOptionsNode.textContent = i + 1 + ". " + select;
-
-        // 
-
-        questionOptionsNode.onclick = questionSelect;
-
-        // 
-
-        questionOptions.appendChild(questionOptionsNode);
-
-    });
-
-    //
-
-    function questionSelect() {
-
-    }
-}
-
-// the below code is for the end
-
-// save initials
-
-submitBtn.onclick = saveInitials;
+submitBtn.onclick = saveHighscore;
 
 // begin the quiz
 
-startBtn.onclock = beginQuiz;
+startBtn.onclick = startQuiz;
+
+initialsEl.onkeyup = checkForEnter;

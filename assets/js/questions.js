@@ -1,56 +1,68 @@
 var questions = [
 
     {
-        questionTitle: "Inside which HTML element do we put the JavaScript?",
-        questionOptions: ["<scripting>",
+        title: "Inside which HTML element do we put the JavaScript?",
+        choices: ["<scripting>",
             "<js>",
             "<javascript",
             "<script>"
         ],
-        questionAnswer: "<script>"
+        answer: "<script>"
     },
 
     {
-        questionTitle: "Where is the correct place to insert a JavaScript?",
-        questionOptions: [
+        title: "Where is the correct place to insert a JavaScript?",
+        choices: [
             "The <body> section",
             "The <head> section",
             "Both the <head> section and the <body> section are correct",
         ],
-        questionAnswer: "Both the <head> section and the <body> section are correct"
+        answer: "Both the <head> section and the <body> section are correct"
     },
 
     {
-        questionTitle: "Which of the following is an advantage of using JavaScript?",
-        questionOptions: [
+        title: "Which of the following is an advantage of using JavaScript?",
+        choices: [
             "Less server interaction",
             "Immediate feedback to the visitors",
             "Increased interactivity",
             "All of the above"
         ],
-        questionAnswer: "alerts"
+        answer: "alerts"
     },
 
     {
-        questionTitle: "Which of the following is a valid type of function javascript supports?",
-        questionChoices: [
+        title: "Which of the following is a valid type of function javascript supports?",
+        choices: [
             "named function",
             "anonymous function",
             "Both of the above",
             "None of the above"
         ],
-        questionAnswer: "Both of the above"
+        answer: "Both of the above"
     },
 
     {
-        questionTitle: "Which of the following function of Array object adds and/or removes elements from an array?",
-        questionOptions: [
+        title: "Which of the following function of Array object adds and/or removes elements from an array?",
+        choices: [
             "toSource()",
             "sort()",
             "splice()",
             "unshift()"
         ],
-        questionAnswer: "splice()"
+        answer: "splice()"
+    },
+
+    {
+        title: "Which of the following function of Array object applies a function simultaneously against two values of the array (from left-to-right) as to reduce it to a single value?",
+        choices: [
+            "pop()",
+            "push()",
+            "reduce()",
+            "reduceRight()"
+        ],
+        answer: "reduce()"
     },
 
 ];
+

@@ -23,3 +23,16 @@ function printHighscores() {
         olEl.appendChild(liTag);
     });
 }
+
+  // clearing the scores when user chooses this option
+
+  function clearHighscores() {
+    window.localStorage.removeItem("highscores");
+    window.location.reload();
+  }
+  
+  document.getElementById("clear").onclick = clearHighscores;
+  
+  // calling the function to print the scores 
+  
+  printHighscores();
